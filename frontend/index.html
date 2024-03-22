@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>NewsLetter</title>
+</head>
+<body>
+
+    <div class="card">
+        <div id="input-field">
+            <input type="email" placeholder="Enter your email" id="email-input" >
+            <button id="submit">Send Newsletter</button>
+            <div id="status"></div>
+        </div>
+    </div>
+
+<script>
+    const status = document.getElementById("status");
+
+    document.getElementById("submit").addEventListener("click", () => {
+        const email = document.getElementById("email-input").value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+        if (!emailRegex.test(email)) {
+            status.innerHTML = "Enter a valid email address";
+            status.style.color = "red";
+            return; 
+        }
+
+        fetch("http://localhost:3000/newsLetter/send-mail", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                status.innerHTML = "Email sent successfully";
+                status.style.color = "green";
+                console.log("Email sent successfully");
+            } else {
+                status.innerHTML = "Failed to send email. Please try again later.";
+                status.style.color = "red";
+                console.error("Failed to send email");
+            }
+        })
+        .catch(error => {
+            status.innerHTML = "Error sending email. Please try again later.";
+            status.style.color = "red";
+            console.error("Error sending email:", error);
+        });
+    });
+</script>
+</body>
+</html>
