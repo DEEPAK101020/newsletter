@@ -5,7 +5,7 @@ This website serves as a mail sending platform where user can enter valid email 
 
 ## Description
 
-This website is built using Node.js and Express nodemailer Html,CSS and JawaScript . It serves as [briefly describe the purpose of your website, such as a blog, e-commerce platform, portfolio site, etc.]. 
+This website is built using Node.js and Express nodemailer Html,CSS and JavaScript . It serves  as a mail-sending platform where user can enter valid email address and get mail.
 
 ## Features
 
